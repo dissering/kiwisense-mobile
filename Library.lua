@@ -6961,7 +6961,6 @@ local Library do
                     Name = "\0",
                     FontFace = Library.Font,
                     TextColor3 = FromRGB(255, 255, 255),
-                    TextTransparency = 0.5,
                     Text = Notification.Description,
                     Size = UDim2New(0, 0, 0, 15),
                     BorderSizePixel = 0,
