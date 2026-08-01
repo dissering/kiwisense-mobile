@@ -1,0 +1,9 @@
+Fix keybinds list click and watermark tap on mobile
+
+- Use MouseButton1Down (converted to TouchTap on mobile) instead of InputBegan
+- Keybinds list items now properly toggle their parent toggle on click/tap
+- Watermark now properly toggles UI on tap
+
+Generated with [Devin](https://devin.ai)
+
+Co-Authored-By: Devin <158243242+devin-ai-integration[bot]@users.noreply.github.com>

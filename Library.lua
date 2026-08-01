@@ -7073,11 +7073,9 @@ local Library do
                 Items["Text"].Instance.Text = Text
             end
 
-            Items["Watermark"]:Connect("InputBegan", function(Input)
-                if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
-                    if Library.CurrentWindow then
-                        Library.CurrentWindow:SetOpen(not Library.CurrentWindow.IsOpen)
-                    end
+            Items["Watermark"]:Connect("MouseButton1Down", function()
+                if Library.CurrentWindow then
+                    Library.CurrentWindow:SetOpen(not Library.CurrentWindow.IsOpen)
                 end
             end)
 
@@ -7246,11 +7244,9 @@ local Library do
 
                 NewKey.OnPress = nil
 
-                NewKey:Connect("InputBegan", function(Input)
-                    if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
-                        if NewKey.OnPress then
-                            NewKey.OnPress()
-                        end
+                NewKey:Connect("MouseButton1Down", function()
+                    if NewKey.OnPress then
+                        NewKey.OnPress()
                     end
                 end)
 
