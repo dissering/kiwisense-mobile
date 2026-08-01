@@ -7267,12 +7267,32 @@ local Library do
         Library.Window = function(self, Data)
             Data = Data or { }
 
+            local MobileScale = 1
+            if IsMobile then
+                local ViewportX = Camera.ViewportSize.X
+                if ViewportX < 400 then
+                    MobileScale = 0.65
+                elseif ViewportX < 600 then
+                    MobileScale = 0.75
+                elseif ViewportX < 800 then
+                    MobileScale = 0.85
+                else
+                    MobileScale = 0.9
+                end
+            end
+
+            local BaseW = not IsMobile and 659 or 511
+            local BaseH = not IsMobile and 511 or 459
+            local WinW = math.floor(BaseW * MobileScale)
+            local WinH = math.floor(BaseH * MobileScale)
+
             local Window = {
                 Name = Data.Name or Data.name or "kiwisense",
                 Logo = Data.Logo or Data.logo or "135215559087473",
                 FadeSpeed = Data.FadeSpeed or Data.fadespeed or 0.2,
                 Version = Data.Version or Data.version or "v1.0.0 alpha",
-                Size = not IsMobile and UDim2New(0, 659, 0, 511) or UDim2New(0, 511, 0, 459),
+                Size = UDim2New(0, WinW, 0, WinH),
+                MobileScale = MobileScale,
 
                 Pages = { },
                 SubPages = { },
@@ -7287,7 +7307,7 @@ local Library do
                     Name = "\0",
                     BorderColor3 = FromRGB(0, 0, 0),
                     AnchorPoint = Vector2New(0, 0),
-                    Position = UDim2New(0, Camera.ViewportSize.X / 3.5, 0, Camera.ViewportSize.Y / 3.5),
+                    Position = UDim2New(0, math.floor(Camera.ViewportSize.X / 2 - WinW / 2), 0, math.floor(Camera.ViewportSize.Y / 2 - WinH / 2)),
                     Size = Window.Size,
                     ZIndex = 2,
                     BorderSizePixel = 0,

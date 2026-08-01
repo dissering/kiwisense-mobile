@@ -1,0 +1,9 @@
+Add mobile auto-scaling based on viewport width
+
+- Window size scales down on mobile (0.65x-0.9x based on viewport)
+- Window centered on screen on initial open
+- Floating button remains easily tappable
+
+Generated with [Devin](https://devin.ai)
+
+Co-Authored-By: Devin <158243242+devin-ai-integration[bot]@users.noreply.github.com>
