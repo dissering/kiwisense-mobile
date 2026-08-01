@@ -5416,21 +5416,21 @@ local Library do
             end)
 
             Library:Connect(UserInputService.InputBegan, function(Input)
-                if tostring(Input.KeyCode) == Keybind.Key or tostring(Input.UserInputType) == Keybind.Key and not Keybind.Value == "None" then
-                    if Keybind.Mode == "toggle" then 
+                if Keybind.Value ~= "None" and (tostring(Input.KeyCode) == Keybind.Key or tostring(Input.UserInputType) == Keybind.Key) then
+                    if Keybind.Mode == "toggle" then
                         Keybind:Press()
-                    elseif Keybind.Mode == "hold" then 
+                    elseif Keybind.Mode == "hold" then
                         Keybind:Press(true)
                     end
                 end
 
-                if Input.UserInputType == Enum.UserInputType.MouseButton1 then 
-                    if Library:IsMouseOverFrame(Items["KeybindWindow"]) or Library:IsMouseOverFrame(ModesDropdownItems["OptionHolder"]) then 
+                if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    if Library:IsMouseOverFrame(Items["KeybindWindow"]) or Library:IsMouseOverFrame(ModesDropdownItems["OptionHolder"]) then
                         return
                     end
 
-                    if Debounce then 
-                        return 
+                    if Debounce then
+                        return
                     end
 
                     Keybind:SetOpen(false)
@@ -5438,8 +5438,8 @@ local Library do
             end)
 
             Library:Connect(UserInputService.InputEnded, function(Input)
-                if tostring(Input.KeyCode) == Keybind.Key or tostring(Input.UserInputType) == Keybind.Key and not Keybind.Value == "None"  then
-                    if Keybind.Mode == "hold" then 
+                if Keybind.Value ~= "None" and (tostring(Input.KeyCode) == Keybind.Key or tostring(Input.UserInputType) == Keybind.Key) then
+                    if Keybind.Mode == "hold" then
                         Keybind:Press(false)
                     end
                 end
