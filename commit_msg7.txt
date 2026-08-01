@@ -1,0 +1,9 @@
+Fix notification layout: icon inside frame on left, text offset to right
+
+- Icon now positioned at top-left inside the notification frame
+- Title and Description text offset by 30px to the right to make room for icon
+- Fixes text overlapping the icon
+
+Generated with [Devin](https://devin.ai)
+
+Co-Authored-By: Devin <158243242+devin-ai-integration[bot]@users.noreply.github.com>

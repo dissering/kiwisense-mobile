@@ -6892,16 +6892,18 @@ local Library do
                     PaddingLeft = UDimNew(0, 8)
                 })
 
-                if Notification.Icon then 
+                local IconOffset = 0
+                if Notification.Icon then
+                    IconOffset = 30
                     Items["Icon"] = Instances:Create("ImageLabel", {
                         Parent = Items["Notification"].Instance,
                         Name = "\0",
                         ImageColor3 = Notification.IconColor,
                         BorderColor3 = FromRGB(0, 0, 0),
-                        AnchorPoint = Vector2New(1, 0),
+                        AnchorPoint = Vector2New(0, 0),
                         Image = "rbxassetid://"..Notification.Icon,
                         BackgroundTransparency = 1,
-                        Position = UDim2New(1, 5, 0, 0),
+                        Position = UDim2New(0, 0, 0, 0),
                         Size = UDim2New(0, 22, 0, 22),
                         BorderSizePixel = 0,
                         BackgroundColor3 = FromRGB(255, 255, 255)
@@ -6917,7 +6919,7 @@ local Library do
                     Text = Notification.Name,
                     Size = UDim2New(0, 0, 0, 15),
                     BackgroundTransparency = 1,
-                    Position = UDim2New(0, 0, 0, 2),
+                    Position = UDim2New(0, IconOffset, 0, 2),
                     BorderSizePixel = 0,
                     AutomaticSize = Enum.AutomaticSize.X,
                     TextSize = 14,
@@ -6934,7 +6936,7 @@ local Library do
                     Size = UDim2New(0, 0, 0, 15),
                     BorderSizePixel = 0,
                     BackgroundTransparency = 1,
-                    Position = UDim2New(0, 0, 0, 24),
+                    Position = UDim2New(0, IconOffset, 0, 24),
                     BorderColor3 = FromRGB(0, 0, 0),
                     AutomaticSize = Enum.AutomaticSize.X,
                     TextSize = 14,
