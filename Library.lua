@@ -7179,7 +7179,7 @@ local Library do
             end
 
             function KeybindList:Add(Key, Name)
-                local NewKey = Instances:Create("TextLabel", {
+                local NewKey = Instances:Create("TextButton", {
                     Parent = Items["Content"].Instance,
                     Name = "\0",
                     FontFace = Library.Font,
@@ -7189,7 +7189,7 @@ local Library do
                     Size = UDim2New(1, 0, 0, 20),
                     BorderSizePixel = 0,
                     BackgroundTransparency = 1,
-                    Active = true,
+                    AutoButtonColor = false,
                     TextXAlignment = Enum.TextXAlignment.Left,
                     BorderColor3 = FromRGB(0, 0, 0),
                     AutomaticSize = Enum.AutomaticSize.X,
@@ -7249,11 +7249,9 @@ local Library do
 
                 NewKey.OnPress = nil
 
-                NewKey:Connect("InputBegan", function(Input)
-                    if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
-                        if NewKey.OnPress then
-                            NewKey.OnPress()
-                        end
+                NewKey:Connect("MouseButton1Down", function()
+                    if NewKey.OnPress then
+                        NewKey.OnPress()
                     end
                 end)
 

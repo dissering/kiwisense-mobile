@@ -1,0 +1,10 @@
+Use TextButton for keylist items so clicks are captured
+
+- TextLabel with BackgroundTransparency=1 doesn't capture clicks in Roblox
+- Changed to TextButton with AutoButtonColor=false (looks same, captures input)
+- MouseButton1Down now works and is converted to TouchTap on mobile
+- OnPress calls Keybind:Press() which updates status text and calls callback
+
+Generated with [Devin](https://devin.ai)
+
+Co-Authored-By: Devin <158243242+devin-ai-integration[bot]@users.noreply.github.com>
