@@ -1,0 +1,11 @@
+Add mobile support, auto-save/load, clickable keybinds and watermark
+
+- Watermark is now clickable to toggle UI visibility (touch + mouse)
+- Keybinds list items are clickable to toggle their parent toggle (mobile-friendly)
+- Auto-save config on every flag change (debounced 0.5s) and on menu key press
+- Auto-load config and theme on script start
+- Save on player leaving (AncestryChanged)
+
+Generated with [Devin](https://devin.ai)
+
+Co-Authored-By: Devin <158243242+devin-ai-integration[bot]@users.noreply.github.com>
