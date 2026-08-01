@@ -1,0 +1,12 @@
+Fix keybinds list click to properly toggle and update status
+
+- KeylistItem.OnPress now calls Keybind:Press() which updates the
+  toggled state, calls the bound callback, and updates the keylist
+  status text (on/off) - matching keyboard behavior
+- Use InputBegan on TextLabels/Frames (MouseButton1Down doesn't exist
+  on non-GuiButton instances and was silently failing)
+- Remove unused OnKeylistPress passthrough from Toggle:Keybind
+
+Generated with [Devin](https://devin.ai)
+
+Co-Authored-By: Devin <158243242+devin-ai-integration[bot]@users.noreply.github.com>

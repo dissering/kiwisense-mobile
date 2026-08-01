@@ -4548,9 +4548,6 @@ local Library do
 
             if Library.KeyList then
                 KeylistItem = Library.KeyList:Add("", "")
-                if Data.OnKeylistPress then
-                    KeylistItem.OnPress = Data.OnKeylistPress
-                end
             end
 
             local Items = { } do
@@ -5379,6 +5376,12 @@ local Library do
             end
 
             getgenv().Options[Data.Flag] = Keybind
+
+            if KeylistItem then
+                KeylistItem.OnPress = function()
+                    Keybind:Press()
+                end
+            end
 
             Items["KeyButton"]:Connect("MouseButton1Click", function()
                 if Keybind.Picking then 
@@ -7073,9 +7076,11 @@ local Library do
                 Items["Text"].Instance.Text = Text
             end
 
-            Items["Watermark"]:Connect("MouseButton1Down", function()
-                if Library.CurrentWindow then
-                    Library.CurrentWindow:SetOpen(not Library.CurrentWindow.IsOpen)
+            Items["Watermark"]:Connect("InputBegan", function(Input)
+                if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
+                    if Library.CurrentWindow then
+                        Library.CurrentWindow:SetOpen(not Library.CurrentWindow.IsOpen)
+                    end
                 end
             end)
 
@@ -7244,9 +7249,11 @@ local Library do
 
                 NewKey.OnPress = nil
 
-                NewKey:Connect("MouseButton1Down", function()
-                    if NewKey.OnPress then
-                        NewKey.OnPress()
+                NewKey:Connect("InputBegan", function(Input)
+                    if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
+                        if NewKey.OnPress then
+                            NewKey.OnPress()
+                        end
                     end
                 end)
 
@@ -9389,8 +9396,6 @@ local Library do
                     Mode = Data.Mode or Data.mode or "Toggle",
                 }
 
-                local ParentToggle = NewToggle
-
                 local NewKeybind, KeybindItems = Components.Keybind({
                     Name = Keybind.Name,
                     Parent = ToggleItems["Toggle"],
@@ -9399,12 +9404,7 @@ local Library do
                     Default = Keybind.Default,
                     IsToggle = true,
                     Mode = Keybind.Mode,
-                    Callback = Keybind.Callback,
-                    OnKeylistPress = function()
-                        if ParentToggle then
-                            ParentToggle:Set(not ParentToggle:Get())
-                        end
-                    end
+                    Callback = Keybind.Callback
                 })
 
                 return NewKeybind
