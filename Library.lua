@@ -6888,30 +6888,59 @@ local Library do
                     Name = "\0",
                     PaddingTop = UDimNew(0, 8),
                     PaddingBottom = UDimNew(0, 8),
-                    PaddingRight = UDimNew(0, 8),
-                    PaddingLeft = UDimNew(0, 8)
+                    PaddingRight = UDimNew(0, 10),
+                    PaddingLeft = UDimNew(0, 10)
                 })
 
-                local IconOffset = 0
+                Instances:Create("UIListLayout", {
+                    Parent = Items["Notification"].Instance,
+                    Name = "\0",
+                    FillDirection = Enum.FillDirection.Horizontal,
+                    HorizontalAlignment = Enum.HorizontalAlignment.Left,
+                    VerticalAlignment = Enum.VerticalAlignment.Center,
+                    Padding = UDimNew(0, 8),
+                    SortOrder = Enum.SortOrder.LayoutOrder
+                })
+
                 if Notification.Icon then
-                    IconOffset = 30
                     Items["Icon"] = Instances:Create("ImageLabel", {
                         Parent = Items["Notification"].Instance,
                         Name = "\0",
                         ImageColor3 = Notification.IconColor,
                         BorderColor3 = FromRGB(0, 0, 0),
-                        AnchorPoint = Vector2New(0, 0),
                         Image = "rbxassetid://"..Notification.Icon,
                         BackgroundTransparency = 1,
-                        Position = UDim2New(0, 0, 0, 0),
                         Size = UDim2New(0, 22, 0, 22),
                         BorderSizePixel = 0,
+                        LayoutOrder = 1,
                         BackgroundColor3 = FromRGB(255, 255, 255)
                     })
                 end
 
-                Items["Title"] = Instances:Create("TextLabel", {
+                Items["TextContainer"] = Instances:Create("Frame", {
                     Parent = Items["Notification"].Instance,
+                    Name = "\0",
+                    BorderColor3 = FromRGB(0, 0, 0),
+                    Size = UDim2New(0, 0, 0, 0),
+                    BackgroundTransparency = 1,
+                    BorderSizePixel = 0,
+                    AutomaticSize = Enum.AutomaticSize.XY,
+                    LayoutOrder = 2,
+                    BackgroundColor3 = FromRGB(255, 255, 255)
+                })
+
+                Instances:Create("UIListLayout", {
+                    Parent = Items["TextContainer"].Instance,
+                    Name = "\0",
+                    FillDirection = Enum.FillDirection.Vertical,
+                    HorizontalAlignment = Enum.HorizontalAlignment.Left,
+                    VerticalAlignment = Enum.VerticalAlignment.Top,
+                    Padding = UDimNew(0, 2),
+                    SortOrder = Enum.SortOrder.LayoutOrder
+                })
+
+                Items["Title"] = Instances:Create("TextLabel", {
+                    Parent = Items["TextContainer"].Instance,
                     Name = "\0",
                     FontFace = Library.Font,
                     TextColor3 = FromRGB(255, 255, 255),
@@ -6919,15 +6948,16 @@ local Library do
                     Text = Notification.Name,
                     Size = UDim2New(0, 0, 0, 15),
                     BackgroundTransparency = 1,
-                    Position = UDim2New(0, IconOffset, 0, 2),
                     BorderSizePixel = 0,
                     AutomaticSize = Enum.AutomaticSize.X,
+                    TextXAlignment = Enum.TextXAlignment.Left,
                     TextSize = 14,
+                    LayoutOrder = 1,
                     BackgroundColor3 = FromRGB(255, 255, 255)
                 })  Items["Title"]:AddToTheme({TextColor3 = "Text"})
 
                 Items["Description"] = Instances:Create("TextLabel", {
-                    Parent = Items["Notification"].Instance,
+                    Parent = Items["TextContainer"].Instance,
                     Name = "\0",
                     FontFace = Library.Font,
                     TextColor3 = FromRGB(255, 255, 255),
@@ -6936,10 +6966,11 @@ local Library do
                     Size = UDim2New(0, 0, 0, 15),
                     BorderSizePixel = 0,
                     BackgroundTransparency = 1,
-                    Position = UDim2New(0, IconOffset, 0, 24),
                     BorderColor3 = FromRGB(0, 0, 0),
                     AutomaticSize = Enum.AutomaticSize.X,
+                    TextXAlignment = Enum.TextXAlignment.Left,
                     TextSize = 14,
+                    LayoutOrder = 2,
                     BackgroundColor3 = FromRGB(255, 255, 255)
                 })  Items["Description"]:AddToTheme({TextColor3 = "Inactive Text"})
             end
