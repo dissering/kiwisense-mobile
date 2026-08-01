@@ -6976,63 +6976,15 @@ local Library do
             end
 
             local OldSize = Items["Notification"].Instance.AbsoluteSize
-            Items["Notification"].Instance.BackgroundTransparency = 1
-            Items["Notification"].Instance.Size = UDim2New(0, 0, 0, 0)
-
-            local Descendants = Items["Notification"].Instance:GetDescendants()
-            for Index, Value in Descendants do
-                if Value:IsA("UIStroke") then
-                    Value.Transparency = 1
-                elseif Value:IsA("TextLabel") then
-                    Value.TextTransparency = 1
-                elseif Value:IsA("ImageLabel") then
-                    Value.ImageTransparency = 1
-                elseif Value:IsA("Frame") then
-                    Value.BackgroundTransparency = 1
-                end
-            end
-
-            task.wait(0.05)
-
             Items["Notification"].Instance.AutomaticSize = Enum.AutomaticSize.None
+            Items["Notification"].Instance.Size = UDim2New(0, OldSize.X, 0, OldSize.Y)
+            Items["Notification"].Instance.BackgroundTransparency = 0
 
-            Library:Thread(function()
-                Items["Notification"]:Tween(nil, {BackgroundTransparency = 0, Size = UDim2New(0,  OldSize.X, 0, OldSize.Y)})
-
-                task.wait(0.06)
-
-                for Index, Value in Descendants do
-                    if Value:IsA("UIStroke") then
-                        Value.Transparency = 0
-                    elseif Value:IsA("TextLabel") then
-                        Value.TextTransparency = 0
-                    elseif Value:IsA("ImageLabel") then
-                        Value.ImageTransparency = 0
-                    elseif Value:IsA("Frame") then
-                        Value.BackgroundTransparency = 0
-                    end
-                end
-
-                task.delay(Data.Duration, function()
-                    for Index, Value in Descendants do
-                        if Value:IsA("UIStroke") then
-                            Value.Transparency = 1
-                        elseif Value:IsA("TextLabel") then
-                            Value.TextTransparency = 1
-                        elseif Value:IsA("ImageLabel") then
-                            Value.ImageTransparency = 1
-                        elseif Value:IsA("Frame") then
-                            Value.BackgroundTransparency = 1
-                        end
-                    end
-
-                    task.wait(0.06)
-
-                    Items["Notification"]:Tween(nil, {BackgroundTransparency = 1, Size = UDim2New(0, 0, 0, 0)})
-
-                    task.wait(0.3)
-                    Items["Notification"]:Clean()
-                end)
+            task.delay(Data.Duration, function()
+                Items["Notification"].Instance.BackgroundTransparency = 1
+                Items["Notification"].Instance.Size = UDim2New(0, 0, 0, 0)
+                task.wait(0.1)
+                Items["Notification"]:Clean()
             end)
 
             return Notification
