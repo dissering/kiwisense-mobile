@@ -2471,6 +2471,12 @@ local Library do
         self.ThemeMap[Item] = self.ThemeMap[Item]
     end
 
+    Library.ThemeCallbacks = {}
+
+    Library.OnThemeChanged = function(self, Callback)
+        table.insert(self.ThemeCallbacks, Callback)
+    end
+
     Library.ChangeTheme = function(self, Theme, Color)
         self.Theme[Theme] = Color
 
@@ -2482,6 +2488,10 @@ local Library do
                     Item.Item[Property] = Value()
                 end
             end
+        end
+
+        for _, Callback in self.ThemeCallbacks do
+            Library:SafeCall(Callback, self.Theme)
         end
     end
 
