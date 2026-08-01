@@ -6979,49 +6979,50 @@ local Library do
             Items["Notification"].Instance.BackgroundTransparency = 1
             Items["Notification"].Instance.Size = UDim2New(0, 0, 0, 0)
 
-            for Index, Value in Items["Notification"].Instance:GetDescendants() do
-                if Value:IsA("UIStroke") then 
+            local Descendants = Items["Notification"].Instance:GetDescendants()
+            for Index, Value in Descendants do
+                if Value:IsA("UIStroke") then
                     Value.Transparency = 1
-                elseif Value:IsA("TextLabel") then 
+                elseif Value:IsA("TextLabel") then
                     Value.TextTransparency = 1
-                elseif Value:IsA("ImageLabel") then 
+                elseif Value:IsA("ImageLabel") then
                     Value.ImageTransparency = 1
-                elseif Value:IsA("Frame") then 
+                elseif Value:IsA("Frame") then
                     Value.BackgroundTransparency = 1
                 end
             end
-            
-            task.wait(0.2)
+
+            task.wait(0.05)
 
             Items["Notification"].Instance.AutomaticSize = Enum.AutomaticSize.None
 
             Library:Thread(function()
                 Items["Notification"]:Tween(nil, {BackgroundTransparency = 0, Size = UDim2New(0,  OldSize.X, 0, OldSize.Y)})
-                
+
                 task.wait(0.06)
 
-                for Index, Value in Items["Notification"].Instance:GetDescendants() do
+                for Index, Value in Descendants do
                     if Value:IsA("UIStroke") then
-                        Tween:Create(Value, nil, {Transparency = 0}, true)
+                        Value.Transparency = 0
                     elseif Value:IsA("TextLabel") then
-                        Tween:Create(Value, nil, {TextTransparency = 0}, true)
+                        Value.TextTransparency = 0
                     elseif Value:IsA("ImageLabel") then
-                        Tween:Create(Value, nil, {ImageTransparency = 0}, true)
+                        Value.ImageTransparency = 0
                     elseif Value:IsA("Frame") then
-                        Tween:Create(Value, nil, {BackgroundTransparency = 0}, true)
+                        Value.BackgroundTransparency = 0
                     end
                 end
 
                 task.delay(Data.Duration, function()
-                    for Index, Value in Items["Notification"].Instance:GetDescendants() do
+                    for Index, Value in Descendants do
                         if Value:IsA("UIStroke") then
-                            Tween:Create(Value, nil, {Transparency = 1}, true)
+                            Value.Transparency = 1
                         elseif Value:IsA("TextLabel") then
-                            Tween:Create(Value, nil, {TextTransparency = 1}, true)
+                            Value.TextTransparency = 1
                         elseif Value:IsA("ImageLabel") then
-                            Tween:Create(Value, nil, {ImageTransparency = 1}, true)
+                            Value.ImageTransparency = 1
                         elseif Value:IsA("Frame") then
-                            Tween:Create(Value, nil, {BackgroundTransparency = 1}, true)
+                            Value.BackgroundTransparency = 1
                         end
                     end
 
@@ -7029,7 +7030,7 @@ local Library do
 
                     Items["Notification"]:Tween(nil, {BackgroundTransparency = 1, Size = UDim2New(0, 0, 0, 0)})
 
-                    task.wait(0.5)
+                    task.wait(0.3)
                     Items["Notification"]:Clean()
                 end)
             end)
